@@ -1,0 +1,11 @@
+GET http://localhost:3000
+
+###Post request 
+
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+  "name":"Tayyab",
+  "email":"muhammadtayyab742002@gmail.com"
+}
