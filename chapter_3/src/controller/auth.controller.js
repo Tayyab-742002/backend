@@ -31,16 +31,34 @@ export const registerUser = (req, res) => {
       token: token,
     });
   } catch (error) {
-    console.log(error.message);
+    console.log("Registration Error : ",error.message);
     res.sendStatus(503);
   }
 };
 
 export const loginUser = (req, res) => {
-  const { username, password } = req.body;
-  res.status(200).json({
-    success: true,
-    name: username,
-    password: password,
-  });
+  try {
+    const { username, password } = req.body;
+    const getUser = db.prepare("SELECT * FROM users WHERE username = ?");
+    const user = getUser.get(username);
+
+    if (!user) return res.status(404).send({ message: "User not found" });
+
+    const passwordIsValid = bcrypt.compareSync(password, user.password);
+
+    if (!passwordIsValid)
+      return res.status(401).send({
+        message: "User is not authorized",
+      });
+
+    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "24h" });
+    res.status(200).send({
+      success: true,
+      message: "User is login successfully",
+      token: token,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.sendStatus(503);
+  }
 };

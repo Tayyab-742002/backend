@@ -18,7 +18,26 @@ Content-Type: application/json
   "username":"tayyab",
   "password":"123123"
 }
-###
-GET http://localhost:5500/
+###  Fetch all todos 
+GET http://localhost:5500/todos/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM5ODgzNTg1LCJleHAiOjE3Mzk5Njk5ODV9.J6GN_WTIcZh-0qJxezbR4XVpfp5VdD2oiCD99UngqSo
 
-##
+### Creates a new todo 
+
+POST http://localhost:5500/todos/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM5ODgzNTg1LCJleHAiOjE3Mzk5Njk5ODV9.J6GN_WTIcZh-0qJxezbR4XVpfp5VdD2oiCD99UngqSo
+Content-Type: application/json
+
+{
+  "task":"Finish coding the projects"
+}
+
+### Update a todo
+
+PUT http://localhost:5500/todos/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM5ODgzNTg1LCJleHAiOjE3Mzk5Njk5ODV9.J6GN_WTIcZh-0qJxezbR4XVpfp5VdD2oiCD99UngqSo
+Content-Type: application/json
+
+{
+  "completed":1
+}
